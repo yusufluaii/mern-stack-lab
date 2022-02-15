@@ -1,0 +1,36 @@
+version: "3"
+services:
+  memo-client:
+    build:
+      context: client/
+      dockerfile: client-dockerfile
+    ports:
+      - 3000:3000
+    container_name: memo-client
+  memo-server:
+    build:
+      context: server/
+      dockerfile: server-dockerfile
+    ports:
+      - 5000:5000
+    container_name: memo-server
+    depends_on:
+    - memo-db
+  memo-db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+    container_name: memo-db
+  admin-mongo:
+    image: adicom/admin-mongo
+    ports:
+      - "1234:1234"
+    container_name: admin-mongo
+networks:
+  memo-app:
+    driver: bridge
+volumes:
+  mongodata:
+    driver: local
