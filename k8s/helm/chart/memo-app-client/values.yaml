@@ -1,0 +1,47 @@
+namespace: production
+
+labels:
+    app: memo-app
+    tier: client
+    env: production
+  
+image:
+  repository: yusufluai/mem-client
+  tag: latest
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+ports:
+  - containerPort: 3000
+    protocol: TCP
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          topologyKey: kubernetes.io/hostname
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - memo-app
+            - key: tier
+              operator: In
+              values:
+              - client
+        weight: 100
+
+servicePort:
+  - name: http
+    port: 3000
+    targetPort: 3000
+
+serviceType: NodePort
+
+BACKEND_URL: http://memo-server/posts

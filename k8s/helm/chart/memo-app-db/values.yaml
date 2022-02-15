@@ -1,0 +1,30 @@
+namespace: production
+
+labels:
+    app: memo-app
+    tier: db
+    env: production
+
+image:
+  repository: mongo
+  tag: latest
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+ports:
+  - containerPort: 27017
+    protocol: TCP
+
+servicePort:
+  - port: 27017    
+    targetPort: 27017
+
+serviceType: ClusterIP
+  
+# secretRef:

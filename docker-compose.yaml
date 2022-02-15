@@ -1,0 +1,36 @@
+version: "3"
+services:
+  mem-client:
+    build:
+      context: client/
+      dockerfile: client-dockerfile
+    ports:
+      - 3000:3000
+    container_name: mem-client
+  mem-server:
+    build:
+      context: server/
+      dockerfile: server-dockerfile
+    ports:
+      - 5000:5000
+    container_name: mem-server
+    depends_on:
+    - mongo
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+    container_name: mongo
+  admin-mongo:
+    image: adicom/admin-mongo
+    ports:
+      - "1234:1234"
+    container_name: admin-mongo
+networks:
+  mem-app:
+    driver: bridge
+volumes:
+  mongodata:
+    driver: local

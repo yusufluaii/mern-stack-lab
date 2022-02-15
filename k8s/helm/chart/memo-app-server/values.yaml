@@ -1,0 +1,50 @@
+namespace: production
+
+labels:
+    app: memo-app
+    tier: server
+    env: production
+
+image:
+  repository: yusufluai/mem-server
+  tag: latest
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+ports:
+  - containerPort: 5000
+    protocol: TCP
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          topologyKey: kubernetes.io/hostname
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - memo-app
+            - key: tier
+              operator: In
+              values:
+              - server
+        weight: 100
+
+servicePort:
+  - name: http
+    port: 5000
+    targetPort: 5000
+
+serviceType: ClusterIP
+
+DB_URI: bW9uZ29kYjovL21lbW8tZGI6MjcwMTcK
+
+  
