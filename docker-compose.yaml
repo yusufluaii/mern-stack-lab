@@ -2,14 +2,14 @@ version: "3"
 services:
   memo-client:
     build:
-      context: client/
+      context: code/client/
       dockerfile: client-dockerfile
     ports:
       - 3000:3000
     container_name: memo-client
   memo-server:
     build:
-      context: server/
+      context: code/server/
       dockerfile: server-dockerfile
     ports:
       - 5000:5000
