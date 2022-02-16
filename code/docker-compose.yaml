@@ -23,11 +23,6 @@ services:
     volumes:
       - mongodata:/data/db
     container_name: memo-db
-  admin-mongo:
-    image: adicom/admin-mongo
-    ports:
-      - "1234:1234"
-    container_name: admin-mongo
 networks:
   memo-app:
     driver: bridge
