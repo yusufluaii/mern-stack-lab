@@ -1,12 +1,11 @@
-namespace: production
+namespace: default
 
 labels:
     app: memo-app
     tier: client
-    env: production
   
 image:
-  repository: yusufluai/mem-client
+  repository: yusufluai/memo-client
   tag: latest
 
 resources:
@@ -44,4 +43,4 @@ servicePort:
 
 serviceType: NodePort
 
-BACKEND_URL: http://memo-server/posts
+API_URL: http://192.168.49.2:30060/
