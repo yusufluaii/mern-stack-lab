@@ -1,9 +1,8 @@
-namespace: production
+namespace: default
 
 labels:
     app: memo-app
     tier: db
-    env: production
 
 image:
   repository: mongo
