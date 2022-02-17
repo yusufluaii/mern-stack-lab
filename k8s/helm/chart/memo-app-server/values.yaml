@@ -5,7 +5,7 @@ labels:
     tier: server
 
 image:
-  repository: yusufluai/mem-server
+  repository: yusufluai/memo-server
   tag: latest
 
 resources:
