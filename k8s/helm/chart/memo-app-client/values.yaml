@@ -43,4 +43,4 @@ servicePort:
 
 serviceType: NodePort
 
-API_URL: http://192.168.49.2:30060/
+API_URL: http://memo-server/posts
