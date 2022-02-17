@@ -1,20 +1,22 @@
 FROM node:14-alpine as builder
 
-WORKDIR /app
+RUN mkdir -p /builder
 
-COPY ./package.json ./package-lock.json /app/
+WORKDIR /builder
 
-RUN npm ci
+COPY package.json package-lock.json ./
+
+RUN npm install --silent
 
 COPY . .
 
-RUN npm build
+RUN npm run-script build
 
 FROM node:14-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app/build .
+COPY --from=builder /builder/build .
 
 EXPOSE 3000
 
