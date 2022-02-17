@@ -1,9 +1,8 @@
-namespace: production
+namespace: default
 
 labels:
     app: memo-app
     tier: server
-    env: production
 
 image:
   repository: yusufluai/mem-server
