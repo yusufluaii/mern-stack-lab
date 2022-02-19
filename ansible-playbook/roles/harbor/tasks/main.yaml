@@ -1,0 +1,16 @@
+- name: update package and install wget
+  ansible.builtin.apt:
+    update_cache: yes
+    name: 
+      - wget
+
+- name: download releases
+  ansible.builtin.get_url:
+    url: https://github.com/goharbor/harbor/releases/download/v1.10.10/harbor-offline-installer-v1.10.10.tgz
+    dest: /home/vagrant/installer
+
+- name: Extract harbor.tgz into ${HOME}/installer
+  ansible.builtin.unarchive:
+    src: harbor-offline-installer-v1.10.10.tgz
+    dest: /home/vagrant/installer
+
