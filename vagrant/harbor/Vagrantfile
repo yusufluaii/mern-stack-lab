@@ -1,0 +1,14 @@
+Vagrant.configure("2") do |harbor|
+    harbor.vm.define "harbor" do |harbor|
+        harbor.vm.box =  'ubuntu/focal64'
+        harbor.vm.network "private_network", ip: "10.10.10.20"
+        harbor.vm.hostname = "harbor"
+        harbor.vm.provision "ansible" do |ansible|
+            ansible.playbook = "../../ansible-playbook/harbor.yaml"
+        end
+            harbor.vm.provider "virtualbox" do |v|
+                v.memory = 2064
+                v.cpus = 2
+         end
+    end
+end
